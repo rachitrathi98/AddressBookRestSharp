@@ -186,10 +186,10 @@ namespace AddressBook
         }
         public void AddContactDetailsInDBusingThread(List<ContactsDB> contactDetails)
         {
+            Stopwatch s = new Stopwatch();
             ///In this we are passing a list and for each contact in the list different thread is being vrear
             foreach (var contact in contactDetails)
             {
-                Stopwatch s = new Stopwatch();
                 s.Start();
                 Thread thread = new Thread(() =>
                 {
