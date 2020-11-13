@@ -87,18 +87,27 @@ namespace AddressBookTst
             jObject.Add("zip", 400004);
             jObject.Add("phoneNo", 106098752);
             jObject.Add("emailId", "rakesh@gmail.com");
-
             request.AddParameter("application/json", jObject, ParameterType.RequestBody);
-
             IRestResponse response = client.Execute(request);
-
             Assert.AreEqual(response.StatusCode, HttpStatusCode.OK);
-
             Contact contacts = JsonConvert.DeserializeObject<Contact>(response.Content);
-
             Assert.AreEqual("Baner", contacts.address);
             Assert.AreEqual("Pune", contacts.city);
             Console.WriteLine(response.Content);
+
+        }
+        /// <summary>
+        /// UC 25 DeleteContacts
+        /// </summary>
+        [TestMethod]
+        public void DeleteContacts()
+        {
+            //Arrange
+            RestRequest request = new RestRequest("/contacts/5", Method.DELETE);
+            //Act
+            IRestResponse response = client.Execute(request);
+            //Assert
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.OK);
 
         }
 
